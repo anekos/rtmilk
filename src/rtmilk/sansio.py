@@ -283,6 +283,14 @@ class TasksNotesAdd(AuthorizedCall):
 	def Out(cls, **rsp):
 		return _ValidateReturn(NotesResponse, rsp)
 
+class TasksPostpone(AuthorizedCall):
+	def In(self, timeline: str, list_id: str, taskseries_id: str, task_id: str):
+		return self.CommonParams('rtm.tasks.postpone', timeline=timeline, list_id=list_id, taskseries_id=taskseries_id, task_id=task_id)
+
+	@classmethod
+	def Out(cls, **rsp):
+		return _ValidateReturn(TaskResponse, rsp)
+
 class TasksRemoveTags(AuthorizedCall):
 	def In(self, timeline: str, list_id: str, taskseries_id: str, task_id: str, tags: List[str]):
 		tags = ','.join(tags)
